@@ -5,12 +5,17 @@
  */
 package ieeeday;
 
+import java.awt.Toolkit;
+import java.io.File;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 import org.hyperic.sigar.SigarException;
 
 /**
@@ -18,12 +23,17 @@ import org.hyperic.sigar.SigarException;
  * @author Edgar
  */
 public class HiloPrincipal implements Runnable {
-    private JSlider valor_slider;
+    private JSlider slider;
+    private JLabel memoriaActual;
+    private JLabel limiteActual;
     private DataBaseHelper dbh;
     private InfoMemoria infoMem;
+    private int limite;
 
-    public HiloPrincipal(JSlider slider, InfoMemoria infoMem) {
-        this.valor_slider = slider;
+    public HiloPrincipal(JSlider slider, JLabel memoriaActual, JLabel limiteActual, InfoMemoria infoMem) {
+        this.slider = slider;
+        this.memoriaActual = memoriaActual;
+        this.limiteActual = limiteActual;
         this.infoMem = infoMem;
         this.dbh = new DataBaseHelper("root", "root");
         
@@ -32,33 +42,44 @@ public class HiloPrincipal implements Runnable {
     @Override
     public void run() {
         String porcentaje;
+         
+          
         while (true) {
             try {
                 
-               
-                valor_slider.addChangeListener(new ChangeListener() {
+                slider.addChangeListener(new ChangeListener() {
 
                     @Override
                     public void stateChanged(ChangeEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        limite = slider.getValue();          
+                        limiteActual.setText(limite + "%");
                     }
                 });
                 
-                 dbh.iniciarConexion();
                 porcentaje = infoMem.getPorcentaje();
-                if (Double.parseDouble(porcentaje) > (double)valor_slider.getValue()) {
-                    JOptionPane.showMessageDialog(null, "Se está pasando de verga");
-                }
+                memoriaActual.setText(porcentaje +"%");
+                dbh.iniciarConexion();
                 dbh.query(porcentaje);
                 dbh.cerrarConexion();
+                
+                if (Double.parseDouble(porcentaje) > (double)limite) {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null, "Se está pasando del límite", "¡ALERTA!", JOptionPane.ERROR_MESSAGE);                    
+                } 
+                
                 Thread.sleep(2000);
             } catch (SQLException |ClassNotFoundException |
                     InterruptedException | UnknownHostException |
                     SigarException e) {
-                System.out.println("WEA " + e.getMessage());  
+                System.out.println("ERROR!:  " + e.getMessage());  
                 //System.out.println(e);
             }
         }
+    }
+    
+    public  void reproducirMusica() throws BasicPlayerException{
+         
+          
     }
     
     

@@ -5,6 +5,9 @@
  */
 package ieeeday;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,7 +25,10 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         this.setLookAndFeel();
         this.setResizable(false);
-        this.setSize(506, 550);      
+        this.setSize(406, 550);     
+        this.setLocationRelativeTo(null);
+        this.limiteActual.setText(slider.getValue()+"");
+        
         
     }
 
@@ -45,29 +51,45 @@ public class Interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        nivel_slider = new javax.swing.JSlider();
+        slider = new javax.swing.JSlider();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        limiteActual = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        memoriaActual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IEEE Day - Memory Monitor");
         setSize(new java.awt.Dimension(300, 600));
 
-        nivel_slider.setMajorTickSpacing(5);
-        nivel_slider.setOrientation(javax.swing.JSlider.VERTICAL);
-        nivel_slider.setPaintLabels(true);
-        nivel_slider.setPaintTicks(true);
-        nivel_slider.setToolTipText("");
-        nivel_slider.setPreferredSize(new java.awt.Dimension(49, 500));
-        jPanel1.add(nivel_slider);
+        slider.setMajorTickSpacing(5);
+        slider.setOrientation(javax.swing.JSlider.VERTICAL);
+        slider.setPaintLabels(true);
+        slider.setPaintTicks(true);
+        slider.setToolTipText("");
+        slider.setPreferredSize(new java.awt.Dimension(49, 500));
+        jPanel1.add(slider);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("IEEE Day - Memory Monitor");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/imagen.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/imagen.png"))); // NOI18N
+
+        limiteActual.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        limiteActual.setText("Test");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setText("Memoria actual:");
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel4.setText("Límite actual:");
+
+        memoriaActual.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        memoriaActual.setText("Test");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -75,20 +97,48 @@ public class Interfaz extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel1)))
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel1)
+                        .addGap(0, 32, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(limiteActual)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(211, Short.MAX_VALUE)
+                    .addComponent(memoriaActual)
+                    .addGap(39, 39, 39)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel3)
-                .addContainerGap())
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(limiteActual)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel2)
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(115, 115, 115)
+                    .addComponent(memoriaActual)
+                    .addContainerGap(362, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -96,19 +146,31 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JSlider getNivel_slider() {
-        return nivel_slider;
+    public JSlider getSlider() {
+        return slider;
+    }
+
+    public JLabel getMemoriaActual() {
+        return memoriaActual;
+    }
+
+    public JLabel getLimiteActual() {
+        return limiteActual;
     }
     
     
     
-   
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSlider nivel_slider;
+    private javax.swing.JLabel limiteActual;
+    private javax.swing.JLabel memoriaActual;
+    private javax.swing.JSlider slider;
     // End of variables declaration//GEN-END:variables
+
+    
 }

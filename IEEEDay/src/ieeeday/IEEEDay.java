@@ -21,10 +21,10 @@ public class IEEEDay {
      */
     public static void main(String[] args) {
         try {
-            reproducirMusica();
+            
             Interfaz i = new Interfaz();
             i.setVisible(true);
-            HiloPrincipal hilo = new HiloPrincipal(i.getNivel_slider(), new InfoMemoria());
+            HiloPrincipal hilo = new HiloPrincipal(i.getSlider(), i.getMemoriaActual(), i.getLimiteActual(), new InfoMemoria());
             hilo.run();
             /*System.out.println("====Informacion del sistema====");
              new InfoSO().imprimirInfo();
@@ -41,9 +41,5 @@ public class IEEEDay {
         }
     }
     
-    public static void reproducirMusica() throws BasicPlayerException{
-          BasicPlayer bp = new BasicPlayer();
-          bp.open(new File("music/eliza.mp3"));
-          bp.play();
-    }
+    
 }
