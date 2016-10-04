@@ -5,6 +5,8 @@
  */
 package ieeeday;
 
+import org.hyperic.sigar.SigarException;
+
 /**
  *
  * @author Edgar
@@ -15,7 +17,17 @@ public class IEEEDay {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            System.out.println("====Informacion del sistema====");
+            new InfoSO().imprimirInfo();
+            System.out.println("\n==== Informacion de la CPU ====");
+            new InfoCPU().imprimirInfoCPU();
+            System.out.println("\n====Informacion del sistema de archivos====");
+            new InfoSistemaArchivos().imprimirInfo();
+            System.out.println("\n====Informacion de la memoria====");
+            new InfoMemoria().imprimirInfo();
+        } catch (SigarException e) {
+            e.printStackTrace();
+        }
     }
-    
 }
