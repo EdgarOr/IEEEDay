@@ -5,6 +5,9 @@
  */
 package ieeeday;
 
+import java.io.File;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 import org.hyperic.sigar.SigarException;
 
 /**
@@ -18,17 +21,17 @@ public class IEEEDay {
      */
     public static void main(String[] args) {
         try {
+            reproducirMusica();
             Interfaz i = new Interfaz();
-             i.setVisible(true);
+            i.setVisible(true);
             HiloPrincipal hilo = new HiloPrincipal(i.getNivel_slider(), new InfoMemoria());
             hilo.run();
-           
             /*System.out.println("====Informacion del sistema====");
-            new InfoSO().imprimirInfo();
-            System.out.println("\n==== Informacion de la CPU ====");
-            new InfoCPU().imprimirInfoCPU();
-            System.out.println("\n====Informacion del sistema de archivos====");
-            new InfoSistemaArchivos().imprimirInfo();*/
+             new InfoSO().imprimirInfo();
+             System.out.println("\n==== Informacion de la CPU ====");
+             new InfoCPU().imprimirInfoCPU();
+             System.out.println("\n====Informacion del sistema de archivos====");
+             new InfoSistemaArchivos().imprimirInfo();*/
 //            System.out.println("\n====Informacion de la memoria====");
 //            new InfoMemoria().imprimirInfo();
 //            System.out.println(new InfoMemoria().getMemoriaTotal());
@@ -36,5 +39,11 @@ public class IEEEDay {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void reproducirMusica() throws BasicPlayerException{
+          BasicPlayer bp = new BasicPlayer();
+          bp.open(new File("music/eliza.mp3"));
+          bp.play();
     }
 }
