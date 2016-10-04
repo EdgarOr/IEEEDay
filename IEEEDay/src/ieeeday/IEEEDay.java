@@ -18,16 +18,22 @@ public class IEEEDay {
      */
     public static void main(String[] args) {
         try {
+            Interfaz i = new Interfaz();
+             i.setVisible(true);
+            HiloPrincipal hilo = new HiloPrincipal(i.getNivel_slider(), new InfoMemoria());
+            hilo.run();
+           
             /*System.out.println("====Informacion del sistema====");
             new InfoSO().imprimirInfo();
             System.out.println("\n==== Informacion de la CPU ====");
             new InfoCPU().imprimirInfoCPU();
             System.out.println("\n====Informacion del sistema de archivos====");
-            new InfoSistemaArchivos().imprimirInfo();
-            System.out.println("\n====Informacion de la memoria====");
-            new InfoMemoria().imprimirInfo();*/
-            System.out.println(new InfoMemoria().getMemoriaTotal());
-        } catch (SigarException e) {
+            new InfoSistemaArchivos().imprimirInfo();*/
+//            System.out.println("\n====Informacion de la memoria====");
+//            new InfoMemoria().imprimirInfo();
+//            System.out.println(new InfoMemoria().getMemoriaTotal());
+//            System.out.println(new InfoMemoria().getPorcentaje());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

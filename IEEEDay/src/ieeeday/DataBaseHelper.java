@@ -5,6 +5,8 @@
  */
 package ieeeday;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -28,7 +30,7 @@ public class DataBaseHelper {
      * Constructor con datos estándar
      */
     public DataBaseHelper() {
-        this("jdbc:mysql://localhost/ieee", "3306", "root", "");
+        this("jdbc:mysql://localhost/ieee?autoReconnect=true&useSSL=false", "3306", "root", "");
     }
 
     /**
@@ -38,7 +40,7 @@ public class DataBaseHelper {
      * @param pass contraseña de la base de datos
      */
     public DataBaseHelper(String usuario, String pass) {
-        this("jdbc:mysql://localhost/ieee", "3306", usuario, pass);
+        this("jdbc:mysql://localhost/ieee?autoReconnect=true&useSSL=false", "3306", usuario, pass);
     }
 
     /**
@@ -49,7 +51,7 @@ public class DataBaseHelper {
      * @param pass contraseña de la base de datos
      */
     public DataBaseHelper(String puerto, String usuario, String pass) {
-        this("jdbc:mysql://localhost/ieee", puerto, usuario, pass);
+        this("jdbc:mysql://localhost/ieee?autoReconnect=true&useSSL=false", puerto, usuario, pass);
     }
 
     /**
@@ -63,7 +65,7 @@ public class DataBaseHelper {
     public DataBaseHelper(String servidor, String puerto, String usuario, String pass) {
         conexion = null;
         statement = null;
-        this.servidor = "jdbc:mysql://" + servidor + "/ieee";
+        this.servidor = servidor;
         this.puerto = puerto;
         this.usuario = usuario;
         this.pass = pass;
@@ -92,11 +94,13 @@ public class DataBaseHelper {
         return statement.executeQuery(query);
     }
     
-    public void query (String nombre, String porcentaje) throws SQLException {
+    public void query (String porcentaje) throws SQLException, UnknownHostException {
+        InetAddress host = InetAddress.getLocalHost();        
         StringBuilder sb = new StringBuilder();
         sb.append("insert into bitacora_memoria(nombre_equipo, porcentaje_memoria, "
-                + "fecha_registro) values (").append(nombre).append(", ").
-                append(porcentaje).append(", now());");
+                + "fecha_registro) values ('").append(host.getHostName()).append("', ").append(porcentaje).
+                append(", now());");
+        System.out.println(sb.toString());
         executeQuery(sb.toString());
     }
 
@@ -106,6 +110,13 @@ public class DataBaseHelper {
         return true;
     }
 
+    
+    public boolean cerrarConexion() throws  SQLException{
+        conexion.close();
+        statement.close();
+        return true;
+    }
+    
     public Connection getConexion() {
         return conexion;
     }

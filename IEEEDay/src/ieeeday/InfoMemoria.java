@@ -30,6 +30,13 @@ public class InfoMemoria {
         Mem mem = sigar.getMem();
         return mem.getActualUsed();
     }
+    
+    public String getPorcentaje() throws SigarException {
+        Mem mem = sigar.getMem();
+        double porcentaje = ((double)mem.getActualUsed()/mem.getTotal())*100;
+        
+        return String.format("%1$.2f", porcentaje);
+    }
 
     private Long enBytes(long valor) {
         return new Long(valor / 1024);

@@ -5,6 +5,7 @@
  */
 package ieeeday;
 
+import javax.swing.JSlider;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -19,11 +20,21 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
+        this.setLookAndFeel();
         this.setResizable(false);
-        this.setSize(306, 519);
+        this.setSize(506, 550);      
         
     }
 
+    
+    private void setLookAndFeel() {
+         try {           
+                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());                
+            
+        } catch (ClassNotFoundException |InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,30 +96,13 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {           
-                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());                
-            
-        } catch (ClassNotFoundException |InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interfaz().setVisible(true);
-            }
-        });
+    public JSlider getNivel_slider() {
+        return nivel_slider;
     }
+    
+    
+    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
