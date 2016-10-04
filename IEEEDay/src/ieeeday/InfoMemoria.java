@@ -25,6 +25,11 @@ public class InfoMemoria {
         System.out.println("Memoria SWAP usada: " + enBytes(intercambio.getUsed()));
         System.out.println("Memoria SWAP libre: " + enBytes(intercambio.getFree()));
     }
+    
+    public void getMemoriaTotal () throws SigarException {
+        Mem mem = sigar.getMem();
+        System.out.println(mem.getActualUsed());
+    }
 
     private Long enBytes(long valor) {
         return new Long(valor / 1024);

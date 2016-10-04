@@ -18,14 +18,15 @@ public class IEEEDay {
      */
     public static void main(String[] args) {
         try {
-            System.out.println("====Informacion del sistema====");
+            /*System.out.println("====Informacion del sistema====");
             new InfoSO().imprimirInfo();
             System.out.println("\n==== Informacion de la CPU ====");
             new InfoCPU().imprimirInfoCPU();
             System.out.println("\n====Informacion del sistema de archivos====");
             new InfoSistemaArchivos().imprimirInfo();
             System.out.println("\n====Informacion de la memoria====");
-            new InfoMemoria().imprimirInfo();
+            new InfoMemoria().imprimirInfo();*/
+            new InfoMemoria().getMemoriaTotal();
         } catch (SigarException e) {
             e.printStackTrace();
         }
