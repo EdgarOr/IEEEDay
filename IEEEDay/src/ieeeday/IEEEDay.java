@@ -26,7 +26,7 @@ public class IEEEDay {
             new InfoSistemaArchivos().imprimirInfo();
             System.out.println("\n====Informacion de la memoria====");
             new InfoMemoria().imprimirInfo();*/
-            new InfoMemoria().getMemoriaTotal();
+            System.out.println(new InfoMemoria().getMemoriaTotal());
         } catch (SigarException e) {
             e.printStackTrace();
         }
