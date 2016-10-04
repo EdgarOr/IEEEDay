@@ -91,6 +91,14 @@ public class DataBaseHelper {
         statement = conexion.createStatement();
         return statement.executeQuery(query);
     }
+    
+    public void query (String nombre, String porcentaje) throws SQLException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("insert into bitacora_memoria(nombre_equipo, porcentaje_memoria, "
+                + "fecha_registro) values (").append(nombre).append(", ").
+                append(porcentaje).append(", now());");
+        executeQuery(sb.toString());
+    }
 
     public boolean executeQuery(String query) throws SQLException {
         statement = conexion.createStatement();
